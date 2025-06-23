@@ -1,0 +1,27 @@
+---
+- name: "⚙️ Config SSH server"
+  block:
+    - name: "⚙️  Set NOPASSWD in sudo group"
+      lineinfile:
+        dest: "{{ var_sudo_config_path }}"
+        regexp: "^#?%{{ var_sudo_maintenance_group }}"
+        line: "%{{ var_sudo_maintenance_group }} ALL=(ALL:ALL) NOPASSWD:ALL"
+        state: present
+
+    - name: "⚙️  Set NOPASSWD in custom groups"
+      lineinfile:
+        dest: "{{ var_sudo_config_path }}"
+        regexp: '^#?%{{ item }}'
+        line: "%{{ item }} ALL=(ALL:ALL) NOPASSWD:ALL"
+        state: present
+      loop: "{{ input_custom_groups_to_sudo }}"
+      loop_control:
+        loop_var: item
+      when:
+        - input_custom_groups_to_sudo is defined and input_custom_groups_to_sudo != []
+
+  rescue:
+    - name: "❌ Print error if sudo configuration fails"
+      failed_when: true
+      ansible.builtin.debug:
+        msg: "❌ sudo configuration failed! Check logs."

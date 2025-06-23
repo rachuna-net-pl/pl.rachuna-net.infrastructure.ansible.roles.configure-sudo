@@ -1,0 +1,12 @@
+---
+var_sudo_config_path: /etc/sudoers
+var_sudo_maintenance_group: >-
+  {%- if ansible_os_family == 'Debian' -%}
+    sudo
+  {%- elif ansible_os_family == 'RedHat' -%}
+    wheel
+  {%- elif ansible_os_family == 'Alpine' -%}
+    wheel
+  {%- else -%}
+    sudo
+  {%- endif -%}

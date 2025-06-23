@@ -1,0 +1,27 @@
+---
+- name: "💾 Install ssh sudo"
+  block:
+    - name: "💾 [Debian] Install sudo"
+      apt:
+        name: sudo
+        state: present
+        update_cache: true
+      when: ansible_os_family == "Debian"
+
+    - name: "💾 [Alpine] Install sudo"
+      apk:
+        name: sudo
+        state: present
+      when: ansible_os_family == "Alpine"
+
+    - name: "💾 [RedHat] Install sudo"
+      yum:
+        name: sudo
+        state: present
+      when: ansible_os_family == "RedHat"
+
+  rescue:
+    - name: "❌ Print error if packages for sudo installation fails"
+      failed_when: true
+      ansible.builtin.debug:
+        msg: "❌ sudo installation failed! Check logs."
