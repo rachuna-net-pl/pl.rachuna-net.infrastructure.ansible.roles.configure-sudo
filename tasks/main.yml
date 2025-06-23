@@ -1,0 +1,12 @@
+---
+### Debug ###
+- name: "🔍 Debug: os family"
+  debug:
+      msg: "{{ ansible_os_family }}"
+  when: input_debug
+
+- name: "🔗 Include install tasks"
+  include_tasks: install.yml
+
+- name: "🔗 Include config tasks"
+  include_tasks: config.yml

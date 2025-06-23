@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  gather_facts: true
+
+  roles:
+    - role: configure-sudo
+      vars:
+        input_debug: true
+        input_custom_groups_to_sudo: ["superusers"]
