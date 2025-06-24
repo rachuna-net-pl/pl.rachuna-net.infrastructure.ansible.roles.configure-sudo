@@ -1,5 +1,5 @@
 ::include{file=.gitlab/badges.md}
-# ![](https://gitlab.com/pl.rachuna-net/infrastructure/terraform/modules/gitlab-project/-/raw/main/images/linux.png){height=20px} configure-sudo
+# ![](https://gitlab.com/pl.rachuna-net/infrastructure/terraform/modules/gitlab-project/-/raw/main/images/ansible.png){height=20px} configure-sudo
 
 Ansible Role do konfiguracji sudo na serwerach Linux.
 
